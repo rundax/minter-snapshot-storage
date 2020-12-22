@@ -66,7 +66,20 @@ after_success:
         -e README_FILEPATH='/workspace/.docker/dockerhub.md' \
         peterevans/dockerhub-description:2.1.0
     fi
-    helm repo list
+  # import functions
+    . .gitlab-ci-functions/docker.sh
+    . .gitlab-ci-functions/kubernetes.sh
+    rancher_lock && rancher_login && helm_cluster_login
+    rancher_namespace
+    helm_init_namespace
+    $HELM upgrade \
+      --debug \
+      --wait \
+      --namespace ${APP_NAME} \
+      --install ${APP_NAME} \
+      .helm/${APP_NAME} \
+      \
+      --set image.tag=latest
 notifications:
   email: false
 
