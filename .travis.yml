@@ -35,11 +35,6 @@ env:
     # Correct tag is added later
     - BASE_IMAGE=${DOCKER_USERNAME}/${APP_NAME} #DO NOT CHANGE
 before_install:
-
-install:
-  # Make root mounted as rshared to fix kube-dns issues.
-  - sudo mount --make-rshared /
-
   # Download kubectl, which is a requirement for using minikube. Had to install kubeadm on local VM https://kubernetes.io/docs/setup/independent/install-kubeadm/
   - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.15.2/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
 
@@ -47,6 +42,7 @@ install:
   - tar zxvf rancher-linux-amd64-v2.4.5.tar.gz --strip-components=2 -C /usr/local/bin ./rancher-v2.4.5/rancher
 
   - curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
 script:
   - docker build -t $CI_IMAGE -f $DOCKERFILE_RELATIVE_PATH $CONTEXT_RELATIVE_PATH
 after_success:
