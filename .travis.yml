@@ -35,11 +35,12 @@ env:
     # Correct tag is added later
     - BASE_IMAGE=${DOCKER_USERNAME}/${APP_NAME} #DO NOT CHANGE
 install:
-  - set -eux \
-    && curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
-    && chmod 755 kubectl \
-    && mv kubectl /usr/local/bin/kubectl \
-    && true
+
+#  - set -eux \
+#    && curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
+#    && chmod 755 kubectl \
+#    && mv kubectl /usr/local/bin/kubectl \
+#    && true
 
   - set -eux \
     && curl -L https://github.com/rancher/cli/releases/download/v2.4.5/rancher-linux-amd64-v2.4.5.tar.gz -o /tmp/rancher-linux-amd64-v2.4.5.tar.gz \
