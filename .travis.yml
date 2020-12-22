@@ -36,13 +36,10 @@ env:
     - BASE_IMAGE=${DOCKER_USERNAME}/${APP_NAME} #DO NOT CHANGE
 install:
 
-#  - set -eux \
-#    && curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
-#    && chmod 755 kubectl \
-#    && mv kubectl /usr/local/bin/kubectl \
-#    && true
+  - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/linux/amd64/kubectl && \
+    chmod +x kubectl && sudo mv kubectl /usr/local/bin/
 
-  - curl -L https://github.com/rancher/cli/releases/download/v2.4.5/rancher-linux-amd64-v2.4.5.tar.gz -o /tmp/rancher-linux-amd64-v2.4.5.tar.gz \
+  - curl https://github.com/rancher/cli/releases/download/v2.4.5/rancher-linux-amd64-v2.4.5.tar.gz -o /tmp/rancher-linux-amd64-v2.4.5.tar.gz \
     && tar zxvf /tmp/rancher-linux-amd64-v2.4.5.tar.gz --strip-components=2 -C /usr/local/bin ./rancher-v2.4.5/rancher
 
   - curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
