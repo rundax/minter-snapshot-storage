@@ -34,13 +34,12 @@ env:
     # Published image base name (user/image) without tag
     # Correct tag is added later
     - BASE_IMAGE=${DOCKER_USERNAME}/${APP_NAME} #DO NOT CHANGE
+    - KUBE_NAMESPACE=${APP_NAME}
 before_install:
   # Download kubectl, which is a requirement for using minikube. Had to install kubeadm on local VM https://kubernetes.io/docs/setup/independent/install-kubeadm/
   - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.15.2/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
 
   - curl -L https://github.com/rancher/cli/releases/download/v2.4.5/rancher-linux-amd64-v2.4.5.tar.gz > rancher-linux-amd64-v2.4.5.tar.gz
-  - pwd
-  - ls -alh
   - sudo tar zxvf rancher-linux-amd64-v2.4.5.tar.gz --strip-components=2 -C /usr/local/bin ./rancher-v2.4.5/rancher
 
   - curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
@@ -78,9 +77,10 @@ after_success:
     . .gitlab-ci-functions/docker.sh
     . .gitlab-ci-functions/kubernetes.sh
     rancher_lock && rancher_login && helm_cluster_login
+
     rancher_namespace
     helm_init_namespace
-
+    $HELM upgrade  --debug --wait  --namespace ${KUBE_NAMESPACE}  --install ${APP_NAME}  .helm/${APP_NAME}
 notifications:
   email: false
 
