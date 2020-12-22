@@ -41,7 +41,7 @@ before_install:
   - curl -L https://github.com/rancher/cli/releases/download/v2.4.5/rancher-linux-amd64-v2.4.5.tar.gz > rancher-linux-amd64-v2.4.5.tar.gz
   - pwd
   - ls -alh
-  - tar zxvf rancher-linux-amd64-v2.4.5.tar.gz --strip-components=2 -C /usr/local/bin ./rancher-v2.4.5/rancher
+  - sudo tar zxvf rancher-linux-amd64-v2.4.5.tar.gz --strip-components=2 -C /usr/local/bin ./rancher-v2.4.5/rancher
 
   - curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
