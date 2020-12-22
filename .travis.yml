@@ -43,8 +43,8 @@ install:
   # Download kubectl, which is a requirement for using minikube. Had to install kubeadm on local VM https://kubernetes.io/docs/setup/independent/install-kubeadm/
   - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.15.2/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
 
-  - curl -L https://github.com/rancher/cli/releases/download/v2.4.5/rancher-linux-amd64-v2.4.5.tar.gz > /tmp/rancher-linux-amd64-v2.4.5.tar.gz
-  - tar zxvf /tmp/rancher-linux-amd64-v2.4.5.tar.gz --strip-components=2 -C /usr/local/bin ./rancher-v2.4.5/rancher
+  - curl -L https://github.com/rancher/cli/releases/download/v2.4.5/rancher-linux-amd64-v2.4.5.tar.gz > rancher-linux-amd64-v2.4.5.tar.gz
+  - tar zxvf rancher-linux-amd64-v2.4.5.tar.gz --strip-components=2 -C /usr/local/bin ./rancher-v2.4.5/rancher
 
   - curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 script:
