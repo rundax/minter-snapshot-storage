@@ -34,6 +34,8 @@ env:
     # Published image base name (user/image) without tag
     # Correct tag is added later
     - BASE_IMAGE=${DOCKER_USERNAME}/${APP_NAME} #DO NOT CHANGE
+install:
+  - curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 script:
   - docker build -t $CI_IMAGE -f $DOCKERFILE_RELATIVE_PATH $CONTEXT_RELATIVE_PATH
 after_success:
@@ -64,6 +66,7 @@ after_success:
         -e README_FILEPATH='/workspace/.docker/dockerhub.md' \
         peterevans/dockerhub-description:2.1.0
     fi
+    helm repo list
 notifications:
   email: false
 
